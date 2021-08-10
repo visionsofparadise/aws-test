@@ -1,6 +1,8 @@
 import { AWSError, CognitoIdentityServiceProvider, Response } from 'aws-sdk';
 import axios, { AxiosInstance } from 'axios';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
+
+const alphaNanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
 
 export interface ITestUser {
 	userId: string;
@@ -17,7 +19,7 @@ export interface ITestUserProps {
 }
 
 export const testUser = async (props: ITestUserProps) => {
-	const username = `${nanoid()}@${nanoid()}.com`;
+	const username = `${alphaNanoid()}@${alphaNanoid()}.com`;
 	const password = 'abcABC123!"£';
 
 	const signUpResponse = await props.cognito
